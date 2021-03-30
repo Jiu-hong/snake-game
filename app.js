@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     timer = null;
     pause.style.display = "none";
     play.style.display = "block";
-    console.log("score in gameOver: ", score);
+
     cardScore.textContent = score;
     gameovercard.classList.add("show");
 
@@ -211,35 +211,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const check = () => {
     //if move to self
     if (player.includes(newSquare)) {
-      console.log("Game over 1.");
       gameOver();
       return false;
     }
     //if move to left edge:
     if (oldHead % width == 0 && newSquare % width == width - 1) {
-      console.log("Game over 2.");
       gameOver();
       return false;
     }
 
     //if move to right edge
     if (oldHead % width == width - 1 && newSquare % width == 0) {
-      console.log("Game over 3.");
-
       gameOver();
       return false;
     }
 
     //if move to top edge
     if (newSquare < 0) {
-      console.log("Game over 4.");
       gameOver();
       return false;
     }
 
     //if move to bottom edge
     if (newSquare >= width * height) {
-      console.log("Game over 5.");
       gameOver();
       return false;
     }
