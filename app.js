@@ -139,19 +139,21 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const newplayer = () => {
-    //undraw old player
-    player.forEach((p) => squares[p].classList.remove("player"));
+    // player.forEach((p) => squares[p].classList.remove("player"));
 
     //if food eaten, not shift
     // else remove leftmost square
     if (!eaten) {
-      player.shift();
+      const tail = player.shift();
+      //undraw old player
+      squares[tail].classList.remove("player");
     }
 
     player.push(newSquare); //add new square
 
     //draw new player
-    drawPlayer();
+    squares[newSquare].classList.add("player");
+    // drawPlayer();
     eaten = false;
   };
 
