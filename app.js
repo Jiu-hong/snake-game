@@ -107,27 +107,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   drawGroundColor();
 
-  const undrawFoods = () => {
-    foods.forEach((food) => squares[food].classList.remove("food"));
-  };
-  //draw foods
-
-  const drawFoods = () => {
-    foods.forEach((food) => squares[food].classList.add("food"));
-  };
-
   //add foods
   const addFoods = (count) => {
-    //undraw foods
-    undrawFoods();
     let food;
 
     for (let i = 0; i < count; i++) {
       food = createFood();
+      //draw foods
+      squares[food].classList.add("food");
       foods.push(food);
     }
-    //draw foods
-    drawFoods();
   };
 
   const createFood = () => {
@@ -139,8 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const newplayer = () => {
-    // player.forEach((p) => squares[p].classList.remove("player"));
-
     //if food eaten, not shift
     // else remove leftmost square
     if (!eaten) {
@@ -153,7 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //draw new player
     squares[newSquare].classList.add("player");
-    // drawPlayer();
     eaten = false;
   };
 
@@ -203,9 +189,8 @@ document.addEventListener("DOMContentLoaded", () => {
     play.style.display = "block";
 
     cardScore.textContent = score;
-    gameovercard.classList.add("show");
-
     //show gameover card
+    gameovercard.classList.add("show");
   };
 
   const check = () => {
@@ -256,12 +241,12 @@ document.addEventListener("DOMContentLoaded", () => {
       scorecontent.textContent = score;
       //remove old food
 
-      squares[newSquare].classList.remove("food"); //or undraw food?
+      squares[newSquare].classList.remove("food"); //
       let removeIndex = foods.indexOf(newSquare);
       foods.splice(removeIndex, 1);
       //create new food
       let newFood = createFood();
-      squares[newFood].classList.add("food"); //or draw food?
+      squares[newFood].classList.add("food"); //
       foods.push(newFood);
 
       if (score % 100 == 0) {
