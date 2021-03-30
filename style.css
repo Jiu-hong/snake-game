@@ -1,0 +1,371 @@
+:root {
+  --grid-width: 20;
+  --grid-height: 20;
+  --light-grass: rgb(181, 224, 100);
+  --dark-grass: rgb(161, 207, 74);
+  --card-green: rgba(82, 109, 33, 0.9);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  min-width: 280px;
+  min-height: 280px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  background-color: skyblue;
+}
+
+button {
+  border: none;
+  padding: 0.5em;
+  margin: 0.5em;
+  border-radius: 50px;
+  font-weight: 800;
+}
+
+button:active {
+  transform: scale(1.2);
+}
+
+.info {
+  grid-area: info;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  min-height: 100px;
+  padding: 0 calc(50vw - (50vmin - 2em));
+
+  position: relative;
+  overflow-y: hidden;
+}
+
+.info > * {
+  margin: auto;
+  text-align: center;
+}
+
+.infobutton {
+  width: 100%;
+  display: flex;
+  gap: 0.5em;
+}
+
+.infobutton * {
+  flex: 1;
+  min-width: 60px;
+  background-color: var(--dark-grass);
+  color: black;
+}
+
+.levelmenu {
+  position: absolute;
+  padding: 1em;
+
+  /* left: 100%; */
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%);
+  width: 80%;
+  height: 50%;
+  max-width: 500px;
+
+  color: white;
+  background: var(--card-green);
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  transition: top 300ms ease-in-out;
+  z-index: 2;
+}
+.levelmenu.show {
+  top: 50%;
+}
+
+.closemenu {
+  padding: 0;
+  background: transparent;
+  color: white;
+}
+
+.level {
+  margin: 0.5em 0 2em 0;
+  display: none;
+}
+
+.keyboard {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5em;
+}
+
+.keyboard * {
+  flex: 1;
+  background-color: var(--dark-grass);
+}
+#levelinput {
+  margin-left: 1em;
+  top: 10%;
+  position: relative;
+}
+
+.keyboard *:hover,
+.infobutton *:hover {
+  background-color: var(--card-green);
+  color: white;
+}
+
+.playground {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.keyboard {
+  margin: 1em 0;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-width), 1fr);
+  grid-template-rows: repeat(var(--grid-height), 1fr);
+  border: 5px solid var(--dark-grass);
+  box-shadow: 2px 0 5px;
+}
+.grid div {
+  width: calc(5vmin - 0.2em);
+  height: calc(5vmin - 0.2em);
+  min-width: 12px;
+  min-height: 12px;
+}
+
+@media (min-width: 450px) {
+  .grid div {
+    width: calc(4.5vmin - 0.5em);
+    height: calc(4.5vmin - 0.5em);
+  }
+
+  .info {
+    padding: 0 calc(50vw - (45vmin - 5em));
+  }
+}
+
+div .light {
+  background-color: var(--light-grass);
+}
+
+div .dark {
+  background-color: var(--dark-grass);
+}
+
+div .player {
+  background: skyblue;
+  border: 0.1px solid var(--dark-grass);
+}
+
+div .food {
+  background-color: red;
+}
+
+.scorecontent {
+  display: inline-block;
+
+  transition: transform 100ms cubic-bezier(0, -0.92, 0.77, 1.84);
+}
+.scorecontent.transformtext {
+  color: white;
+  transform: scale(1.5);
+}
+
+.pause {
+  display: none;
+}
+
+.gameovercard {
+  padding: 1em;
+  position: absolute;
+  top: 20%;
+  bottom: 20%;
+  left: 10%;
+  right: 10%;
+
+  border-radius: 20px;
+  color: white;
+
+  background: var(--card-green);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  opacity: 0;
+
+  transition: opacity 300ms ease-in-out;
+}
+
+@media (min-width: 435px) and (min-height: 435px) {
+  .gameovercard {
+    top: calc(50% - 20vh);
+    bottom: calc(50% - 20vh);
+    left: calc(50% - 20vh);
+    right: calc(50% - 20vh);
+  }
+}
+
+.gameovercard > * {
+  margin: auto;
+}
+
+.gameovercard.show {
+  opacity: 1;
+}
+
+.card-title {
+  font-size: x-large;
+}
+.card-score {
+  font-size: x-large;
+}
+.card-foot {
+  width: 100%;
+
+  display: flex;
+
+  gap: 1em;
+}
+
+.card-foot > * {
+  flex: 1;
+  background-color: var(--light-grass);
+}
+
+.card-foot > *:hover,
+.card-foot > *:focus {
+  background-color: var(--dark-grass);
+  color: white;
+}
+
+.card-foot > *:active,
+.card-foot > *:active {
+  transform: scale(1.2);
+}
+
+.canvas {
+  --grass: rgb(81, 148, 94);
+  --tree: rgb(69, 116, 78);
+  --ground: rgb(156, 129, 99);
+  position: absolute;
+  width: 50vmin;
+  height: 50vmin;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+body::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  background-image: linear-gradient(transparent 85%, rgb(156, 129, 99) 0);
+  z-index: -2;
+}
+
+.canvas + .canvas {
+  right: 0;
+  left: initial;
+  transform: scaleX(-1);
+}
+.canvas div {
+  position: absolute;
+}
+
+.leaves {
+  background: var(--tree);
+  bottom: 15%;
+  left: 1%;
+  width: 30%;
+  height: 30%;
+  border: none;
+
+  box-shadow: 8vmin -6vmin 0 2vmin var(--tree), 12vmin 2vmin var(--tree);
+
+  border-radius: 50%;
+}
+
+.trunk {
+  bottom: 0;
+  width: 2vmin;
+  height: 30%;
+  left: 25%;
+  background: burlywood;
+}
+
+.trunk::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  background-image: linear-gradient(
+    to top right,
+    burlywood 0 50%,
+    transparent 0
+  );
+}
+
+.trunk::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  background-image: linear-gradient(
+    to top left,
+    burlywood 0 50%,
+    transparent 0
+  );
+}
+
+.singleleave {
+  bottom: 0;
+  left: 0;
+  width: 5%;
+  height: 5%;
+  background: var(--tree);
+
+  border-radius: 100% 10%;
+
+  box-shadow: 10vmin -5vmin 0 0 var(--tree);
+}
